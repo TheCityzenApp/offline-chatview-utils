@@ -27,6 +27,7 @@
 /// - [voice]: A voice message (Android & iOS only).
 /// - [custom]: A custom message type.
 /// - [file]: A general file message.
+/// - [video]: A video message.
 /// {@endtemplate}
 enum MessageType {
   image,
@@ -35,7 +36,8 @@ enum MessageType {
   /// Only supported on android and ios
   voice,
   custom,
-  file; // <--- ADDED 'file' HERE
+  file,
+  video; // <--- ADDED 'video' HERE
 
   bool get isImage => this == image;
 
@@ -45,7 +47,9 @@ enum MessageType {
 
   bool get isCustom => this == custom;
 
-  bool get isFile => this == file; // <--- ADDED 'isFile' GETTER HERE
+  bool get isFile => this == file;
+
+  bool get isVideo => this == video; // <--- ADDED 'isVideo' GETTER HERE
 
   static MessageType? tryParse(String? value) {
     final type = value?.trim().toLowerCase();
@@ -58,8 +62,10 @@ enum MessageType {
       return voice;
     } else if (type == custom.name.toLowerCase()) {
       return custom;
-    } else if (type == file.name.toLowerCase()) { // <--- ADDED PARSING FOR 'file' HERE
+    } else if (type == file.name.toLowerCase()) {
       return file;
+    } else if (type == video.name.toLowerCase()) { // <--- ADDED PARSING FOR 'video' HERE
+      return video;
     }
     return null;
   }
